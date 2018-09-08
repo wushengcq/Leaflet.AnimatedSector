@@ -6,6 +6,7 @@ This is a Leaflet plugin for drawing sector and animating it. Feedback appreciat
 
 The following code will create an sector on map, assuming a `Leaflet.Map` called `map`.
 
+```javascript
 	var sector = L.animatedSector([30.661057, 104.081757], {
         radius: 500000,			// meters
         fillColor: '#ff0000',
@@ -14,11 +15,12 @@ The following code will create an sector on map, assuming a `Leaflet.Map` called
         viewAngleRange: 90,		// the angle of sector
     })
 
-	sector.addTo(_map); 
-
+	sector.addTo(map); 
+```
 
 ## How do I animate the sector ?
 
+```javascript
 	/**
      * AnimatedSector.pendulum(angleStep, minAngle, maxAngle)
      *  angleStep: angle changes during every interval
@@ -43,9 +45,11 @@ The following code will create an sector on map, assuming a `Leaflet.Map` called
 	 * AnimatedSector.stopSpin()
 	 */
     sector.stopSpin();
+```
 
 ## How do I reset the sector's style ?
 
+```javascript
 	/**
      * AnimatedSector.setStyle(options)
      */
@@ -59,4 +63,4 @@ The following code will create an sector on map, assuming a `Leaflet.Map` called
 		borderColor: '#ff0000',
 		borderDashLine: true
 	});
-	
+```	
