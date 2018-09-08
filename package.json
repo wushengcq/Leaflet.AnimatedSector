@@ -1,0 +1,18 @@
+{
+  "name": "Leaflet.AnimatedSector",
+  "version": "1.0.0",
+  "description": "This is a Leaflet.js plugin for drawing sector and animating it.",
+  "main": "AnimatedSector.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wushengcq/Leaflet.AnimatedSector.git"
+  },
+  "author": "WuSheng",
+  "devDependencies": {
+    "uglify-js": "^2.5.0"
+  },
+  "scripts": {
+    "build": "uglifyjs src/AnimatedSector.js -c -m -o dist/AnimatedSector.js"
+  }
+}

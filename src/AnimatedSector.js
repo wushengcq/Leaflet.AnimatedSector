@@ -18,7 +18,7 @@ L.AnimatedSector = L.Circle.extend({
     options: {
         pixelRadius: true,
 		fill: true,
-		fillColor: '#ffff00',
+		fillColor: '#004CB3',
         fillOpacity: 0.2,
 		fillGradient: true,
 		border: 0,
@@ -63,7 +63,7 @@ L.AnimatedSector = L.Circle.extend({
 	},
 
 	spin: function(step, interval) {
-		this.pendulum(step, this.options.directionAngle, this.options.directionAngle * 100000, interval);
+		this.pendulum(step, this.options.directionAngle, Number.MAX_VALUE, interval);
 	},
 
 	stopSpin: function() {
@@ -78,13 +78,16 @@ L.Canvas.prototype._updateSector = function(layer) {
     var p = layer._point;
     var ctx = this._ctx;
     var ops = layer.options;
-	var r = Math.round(layer._radius);
+    var r = Math.max(Math.round(layer._radius), 1);
+    var s = (Math.max(Math.round(layer._radiusY), 1) || r) / r;
 
     this._drawnLayers[layer._leaflet_id] = layer;
 
     ctx.save();
+    if (s !== 1) ctx.scale(1, s);	// must take the Projection into account
+
     ctx.beginPath();
-    ctx.translate(p.x, p.y);
+    ctx.translate(p.x, p.y / s);
     ctx.moveTo(0, 0);
     ctx.arc(0, 0, r,
         -(ops.directionAngle - ops.viewAngleRange / 2.0) * Math.PI / 180,
@@ -118,6 +121,10 @@ L.Canvas.prototype._updateSector = function(layer) {
 }
 
 L.animatedSector = function (latlng, options, legacyOptions){
+    return new L.AnimatedSector(latlng, options, legacyOptions);
+};
+
+L.sector = function (latlng, options, legacyOptions){
     return new L.AnimatedSector(latlng, options, legacyOptions);
 };
 
