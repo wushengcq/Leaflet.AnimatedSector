@@ -6,6 +6,8 @@ This is a Leaflet plugin for drawing sector and animating it. Feedback appreciat
 
 <https://wushengcq.github.io/demo/animated-sector/index.html>
 
+![example screenshot](/example/example.png)
+
 ## How can I use it?
 
 The following code will create an sector on map, assuming a `Leaflet.Map` called `map`.
