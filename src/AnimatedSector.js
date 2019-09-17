@@ -107,6 +107,10 @@ L.Canvas.prototype._updateSector = function(layer) {
 		ctx.fill();
 	} 
 
+	if (ops.fillPattern && this._fillPattern) {
+		this._fillPattern(ctx, layer);
+	}
+
 	if (ops.border > 0) {
 		ctx.lineWidth = ops.border;
 		ctx.strokeStyle = ops.borderColor;
