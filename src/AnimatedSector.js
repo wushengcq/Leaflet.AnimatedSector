@@ -69,19 +69,24 @@ L.AnimatedSector = L.Circle.extend({
 	stopSpin: function() {
 		this.stopPendulum();	
 	},
-
 });
 
 L.Canvas.prototype._updateSector = function(layer) {
 	if (!this._drawing || layer._empty()) { return; }
-
-	var p = layer._point;
+	
+	// if using this project _point, the center of circle would change according with the value of radius,
+	// the minor offset of center is unobservable for circle, but is obvious when serveral sectors overlap with same latlng center.
+	// so, we use the original center without project
+	// var p = layer._point;
+	var p = layer._map.latLngToLayerPoint(layer._latlng);
 	var ctx = this._ctx;
 	var ops = layer.options;
 	var r = Math.max(Math.round(layer._radius), 1);
 	var s = (Math.max(Math.round(layer._radiusY), 1) || r) / r;
 
-	this._drawnLayers[layer._leaflet_id] = layer;
+	// new version leaflet change _drawnLayers to _layers
+	//this._drawnLayers[layer._leaflet_id] = layer;
+	this._layers[layer._leaflet_id] = layer;
 
 	ctx.save();
 	if (s !== 1) ctx.scale(1, s);	// must take the Projection into account
@@ -131,5 +136,4 @@ L.animatedSector = function (latlng, options, legacyOptions){
 L.sector = function (latlng, options, legacyOptions){
 	return new L.AnimatedSector(latlng, options, legacyOptions);
 };
-
 
