@@ -86,7 +86,11 @@ L.Canvas.prototype._updateSector = function(layer) {
 
 	// new version leaflet change _drawnLayers to _layers
 	//this._drawnLayers[layer._leaflet_id] = layer;
-	this._layers[layer._leaflet_id] = layer;
+	if (this._drawnLayers) {
+		this._drawnLayers[layer._leaflet_id] = layer;
+	} else {
+		this._layers[layer._leaflet_id] = layer;
+	}
 
 	ctx.save();
 	if (s !== 1) ctx.scale(1, s);	// must take the Projection into account
